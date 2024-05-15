@@ -2,7 +2,7 @@ server:
   port: 8091
 spring:
   datasource:
-    url: jdbc:nysql://localhost:3306/vehicles-db
+    url: jdbc:mysql://localhost:3306/vehicles-db
     username: root
     password: mysql2024$
 eureka:

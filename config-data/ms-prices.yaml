@@ -2,7 +2,7 @@ server:
   port: 8090
 spring:
   datasource:
-    url: jdbc:nysql://localhost:3306/prices-db
+    url: jdbc:mysql://localhost:3306/prices-db
     username: root
     password: mysql2024$
 eureka:
