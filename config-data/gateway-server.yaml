@@ -1,0 +1,35 @@
+server:
+  port: 8080
+  
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      default-zone: http://localhost:8761/eureka
+  instance:
+    hostname: localhost
+
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: ms-prices
+          uri: lb://ms-prices
+          predicates:
+            - Path=/prices/**
+        - id: ms-repairs
+          uri: lb://ms-repairs
+          predicates:
+            - Path=/repairs/**
+        - id: ms-reports
+          uri: lb://ms-reports
+          predicates:
+            - Path=/reports/**
+        - id: ms-vehicles
+          uri: lb://ms-vehicles
+          predicates:
+            - Path=/vehicles/**
