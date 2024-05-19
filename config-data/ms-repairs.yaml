@@ -5,6 +5,9 @@ spring:
     url: jdbc:mysql://localhost:3306/repairs-db
     username: root
     password: mysql2024$
+  jpa:
+    hibernate:
+      ddl-auto: update
 eureka:
   client:
     fetch-registry: true
