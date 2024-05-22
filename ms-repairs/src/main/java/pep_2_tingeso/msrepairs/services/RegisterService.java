@@ -71,11 +71,11 @@ public class RegisterService {
             historyRepairsRepository.save(new HistoryRepairsEntity(null, idHistorial, idReparacion));
         }
 
-        VehicleBackend vehicleBackend = new VehicleBackend(vehicle.getPatent(), markRepository.findByMarkName(vehicle.getMark()), vehicle.getModel(), vehicle.getType(), vehicle.getYear(), vehicle.getTypemotor(), vehicle.getNumberseats(), vehicle.getKilometers());
+        VehicleBackend vehicleBackend = new VehicleBackend(vehicle.getPatent(), markRepository.findByMarkName(vehicle.getMark()).getId(), vehicle.getModel(), vehicle.getType(), vehicle.getYear(), vehicle.getTypemotor(), vehicle.getNumberseats(), vehicle.getKilometers());
 
         HttpEntity<VehicleBackend> request = new HttpEntity<>(vehicleBackend);
 
-        restTemplate.postForObject("http://ms-vehicles/vehicles", request, VehicleBackend.class);
+        restTemplate.postForObject("http://ms-vehicles/vehicles/vehicle/", request, VehicleBackend.class);
 
         return historial;
     }
@@ -90,7 +90,7 @@ public class RegisterService {
         for (Long idReparacion : reparaciones) {
             // Aquí necesitarás una forma de mapear idReparacion a un tipo de reparación y luego a un costo.
             // Esto podría hacerse mediante una consulta a la base de datos o un mapa en memoria, por ejemplo.
-            int costoReparacion = restTemplate.getForObject("http://ms-prices/prices/price/get/" + idReparacion + "/" + motortype, Price.class).getPrice();
+            int costoReparacion = restTemplate.getForObject("http://ms-prices/prices/price/get/" + idReparacion + "/" + motortype, Integer.class);
             montoTotal += costoReparacion;
         }
 
