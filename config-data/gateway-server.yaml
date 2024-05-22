@@ -16,7 +16,7 @@ spring:
       discovery:
         locator:
           enabled: true
-            globalcors:
+      globalcors:
         cors-configurations:
           '[/**]':
             allowedOrigins: '*'
