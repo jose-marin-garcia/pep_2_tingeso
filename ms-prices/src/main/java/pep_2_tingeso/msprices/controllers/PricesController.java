@@ -3,10 +3,8 @@ package pep_2_tingeso.msprices.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pep_2_tingeso.msprices.entities.MarksEntity;
 import pep_2_tingeso.msprices.entities.PricesEntity;
 import pep_2_tingeso.msprices.entities.TypeRepairsEntity;
-import pep_2_tingeso.msprices.services.MarksService;
 import pep_2_tingeso.msprices.services.PricesService;
 import pep_2_tingeso.msprices.services.TypeRepairsService;
 
@@ -23,9 +21,6 @@ public class PricesController {
     @Autowired
     PricesService pricesService;
 
-    @Autowired
-    MarksService marksService;
-
     /*
       _____                 ___                _
      |_   _|  _ _ __  ___  | _ \___ _ __  __ _(_)_ _ ___
@@ -33,6 +28,12 @@ public class PricesController {
        |_| \_, | .__/\___| |_|_\___| .__/\__,_|_|_| /__/
            |__/|_|                 |_|
     */
+
+    @GetMapping("/")
+    public ResponseEntity<List<TypeRepairsEntity>> listTypeRepairs() {
+        List<TypeRepairsEntity> listTypeRepairs = typeRepairsService.listTypeRepairs();
+        return ResponseEntity.ok(listTypeRepairs);
+    }
 
     @PostMapping("/typerepair/")
     public ResponseEntity<TypeRepairsEntity> saveTypeRepair(@RequestBody TypeRepairsEntity typeRepair) {
@@ -53,6 +54,12 @@ public class PricesController {
      |_| |_| |_\__\___/__/
     */
 
+    @GetMapping("/price/get/{idTypeRepair}/{motorType}")
+    public ResponseEntity<Integer> getPrice(@PathVariable Long idTypeRepair, @PathVariable String motorType) {
+        int price = pricesService.getPrice(idTypeRepair, motorType);
+        return ResponseEntity.ok(price);
+    }
+
     @PostMapping("/price/")
     public ResponseEntity<PricesEntity> savePrice(@RequestBody PricesEntity priceEntity) {
         PricesEntity priceNew = pricesService.savePrice(priceEntity);
@@ -63,25 +70,6 @@ public class PricesController {
     public ResponseEntity<List<PricesEntity>> savePrices(@RequestBody List<PricesEntity> pricesEntity) {
         List<PricesEntity> pricesNew = pricesService.savePrices(pricesEntity);
         return ResponseEntity.ok(pricesNew);
-    }
-
-    /*
-      __  __          _
-     |  \/  |__ _ _ _| |__ ___
-     | |\/| / _` | '_| / /(_-<
-     |_|  |_\__,_|_| |_\_\/__/
-    */
-
-    @PostMapping("/mark/")
-    public ResponseEntity<MarksEntity> saveMark(@RequestBody MarksEntity mark) {
-        MarksEntity markNew = marksService.saveMark(mark);
-        return ResponseEntity.ok(markNew);
-    }
-
-    @PostMapping("/mark/list/")
-    public ResponseEntity<List<MarksEntity>> saveMarks(@RequestBody List<MarksEntity> marks) {
-        List<MarksEntity> marksNew = marksService.saveMarks(marks);
-        return ResponseEntity.ok(marksNew);
     }
 
 }

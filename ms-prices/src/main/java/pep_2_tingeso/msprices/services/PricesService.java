@@ -15,5 +15,7 @@ public class PricesService {
 
     public PricesEntity savePrice(PricesEntity priceEntity) { return pricesRepository.save(priceEntity); }
 
-    public List<PricesEntity> savePrices(List<PricesEntity> pricesEntity) { return pricesRepository.saveAll(pricesEntity);  }
+    public List<PricesEntity> savePrices(List<PricesEntity> pricesEntity) { return pricesRepository.saveAll(pricesEntity); }
+
+    public int getPrice(Long idTypeRepair, String motorType) { return pricesRepository.findPriceByIdtyperepairAndMotortype(idTypeRepair, motorType); }
 }

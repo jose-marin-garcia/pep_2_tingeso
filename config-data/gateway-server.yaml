@@ -16,6 +16,12 @@ spring:
       discovery:
         locator:
           enabled: true
+            globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: '*'
+            allowedMethods: "*"
+            allowedHeaders: "*"
       routes:
         - id: ms-prices
           uri: lb://ms-prices
