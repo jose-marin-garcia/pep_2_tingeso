@@ -23,21 +23,21 @@ public class ReportsService {
         List<VehicleCostDetails> vehicleCostDetails = new ArrayList<>();
 
         List<Historic> historiales = restTemplate.exchange(
-                "http://localhost:8080/repairs/historiales",
+                "http://ms-repairs:8080/repairs/historiales",
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<List<Historic>>() {}).getBody();
 
         for (Historic historial : historiales){
 
-            Vehicle vehiculo = restTemplate.getForObject("http://localhost:8080/vehicles/"+historial.getPatent(), Vehicle.class);
+            Vehicle vehiculo = restTemplate.getForObject("http://ms-vehicles:8080/vehicles/"+historial.getPatent(), Vehicle.class);
 
             VehicleCostDetails vehicleCostDetail = new VehicleCostDetails();
 
             vehicleCostDetail.setPatent(historial.getPatent());
 
             vehicleCostDetail.setModel(vehiculo.getModel());
-            vehicleCostDetail.setMark(restTemplate.getForObject("http://localhost:8080/repairs/"+vehiculo.getMark(), String.class));
+            vehicleCostDetail.setMark(restTemplate.getForObject("http://ms-repairs:8080/repairs/"+vehiculo.getMark(), String.class));
             vehicleCostDetail.setType(vehiculo.getType());
             vehicleCostDetail.setTypemotor(vehiculo.getTypemotor());
             vehicleCostDetail.setYear(vehiculo.getYear());
@@ -52,6 +52,8 @@ public class ReportsService {
             vehicleCostDetail.setEndhour(historial.getEndhour());
             vehicleCostDetail.setClientdate(historial.getClientdate());
             vehicleCostDetail.setClienthour(historial.getClienthour());
+
+            vehicleCostDetail.setReparaciones(restTemplate.getForObject("http://ms-repairs:8080/repairs/typerepair/"+historial.getId(), List.class));
 
             vehicleCostDetails.add(vehicleCostDetail);
         }

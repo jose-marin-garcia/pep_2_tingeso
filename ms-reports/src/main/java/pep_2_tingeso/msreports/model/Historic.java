@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Historic {
+    private Long id;
     private String patent; // Patente
     private String admissiondate; //ddmmyyyy
     private String admissionhour; //hhmm

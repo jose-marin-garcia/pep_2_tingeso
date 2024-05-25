@@ -13,10 +13,10 @@ public class TypeRepairsService {
     TypeRepairsRepository typeRepairsRepository;
 
     public List<TypeRepairsEntity> listTypeRepairs() { return typeRepairsRepository.findAll(); }
-    public TypeRepairsEntity getTypeRepairByID(Long id) { return typeRepairsRepository.findById(id).get(); }
+    public String getTypeRepairByID(Long id) { return typeRepairsRepository.findById(id).get().getRepairName(); }
 
     public TypeRepairsEntity saveTypeRepair(TypeRepairsEntity typeRepair) { return typeRepairsRepository.save(typeRepair); }
 
     public List<TypeRepairsEntity> saveTypesRepair(List<TypeRepairsEntity> typeRepair) { return typeRepairsRepository.saveAll(typeRepair);  }
 
-}
+    }

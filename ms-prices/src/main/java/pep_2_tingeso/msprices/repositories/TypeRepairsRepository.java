@@ -7,4 +7,5 @@ import pep_2_tingeso.msprices.entities.TypeRepairsEntity;
 @Repository
 public interface TypeRepairsRepository extends JpaRepository<TypeRepairsEntity, Long> {
 
+
 }

@@ -51,8 +51,14 @@
   padding: 20px;
 }
 
-table {
+.container {
+  display: flex;
+  justify-content: center;
   width: 100%;
+}
+
+table {
+  width: 90%; /* O el ancho que prefieras */
   border-collapse: collapse;
 }
 
@@ -66,14 +72,34 @@ th {
   background-color: #f2f2f2;
 }
 
-tr.active {
-  background-color: #e8f0fe; /* Un color de fondo para resaltar la fila activa */
+/* Estilos para la burbuja de detalles */
+.details {
+  position: absolute;
+  background-color: rgb(223, 223, 223);
+  border: 3px solid  rgb(0, 0, 255);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  z-index: 10;
+  padding: 30px;
+  list-style-type: disc; /* para mostrar viñetas */
+  margin-top: 8px; /* ajustar según sea necesario */
+  width: 40%; /* ajustar según sea necesario */
+  left: 25%; /* centrar respecto a la tabla */
 }
 
-.details {
-  background-color: #f0f0f0;
-  padding: 10px;
-  border-top: 1px solid #ccc;
-  display: block;
-  transition: all 0.3s ease-in-out;
+.button-detail {
+  background-color: rgb(94, 155, 224);
+  color: white;
+  padding: 10px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Opcional: añade un efecto de transición */
+}
+
+.button-detail:hover {
+  background-color: darkblue; /* Cambia el color al pasar el mouse */
+}
+
+.button-detail.selected {
+  background-color: rgb(0, 0, 255);  /* Color cuando está seleccionado*/
 }

@@ -7,10 +7,7 @@ import pep_2_tingeso.msrepairs.entities.BondEntity;
 import pep_2_tingeso.msrepairs.entities.HistoricEntity;
 import pep_2_tingeso.msrepairs.entities.MarkEntity;
 import pep_2_tingeso.msrepairs.model.Registry;
-import pep_2_tingeso.msrepairs.services.BondsService;
-import pep_2_tingeso.msrepairs.services.HistoricsService;
-import pep_2_tingeso.msrepairs.services.MarksService;
-import pep_2_tingeso.msrepairs.services.RegisterService;
+import pep_2_tingeso.msrepairs.services.*;
 
 import java.util.List;
 
@@ -30,6 +27,9 @@ public class RepairsController {
 
     @Autowired
     HistoricsService historicService;
+
+    @Autowired
+    HistoryRepairsService typeRepairsService;
 
 /*    __  __          _
      |  \/  |__ _ _ _| |__ ___
@@ -105,5 +105,18 @@ public class RepairsController {
     public ResponseEntity<List<HistoricEntity>> getHistorics() {
         return ResponseEntity.ok(historicService.getHistorics());
     }
+
+/*    _____               ___                _
+     |_   _|  _ _ __  ___| _ \___ _ __  __ _(_)_ _ ___
+       | || || | '_ \/ -_)   / -_) '_ \/ _` | | '_(_-<
+       |_| \_, | .__/\___|_|_\___| .__/\__,_|_|_| /__/
+           |__/|_|               |_|                  */
+
+    @GetMapping("/typerepair/{idHistoric}")
+    public ResponseEntity<List<String>> getRepairsOfHistoric(@PathVariable Long idHistoric){
+        List<String> historic = typeRepairsService.getRepairsOfHistoric(idHistoric);
+        return ResponseEntity.ok(historic);
+    }
+
 
 }

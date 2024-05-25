@@ -35,6 +35,12 @@ public class PricesController {
         return ResponseEntity.ok(listTypeRepairs);
     }
 
+    @GetMapping("/{idTypeRepair}")
+    public ResponseEntity<String> getTypeRepair(@PathVariable Long idTypeRepair) {
+        String typeRepair = typeRepairsService.getTypeRepairByID(idTypeRepair);
+        return ResponseEntity.ok(typeRepair);
+    }
+
     @PostMapping("/typerepair/")
     public ResponseEntity<TypeRepairsEntity> saveTypeRepair(@RequestBody TypeRepairsEntity typeRepair) {
         TypeRepairsEntity typeRepairNew = typeRepairsService.saveTypeRepair(typeRepair);
