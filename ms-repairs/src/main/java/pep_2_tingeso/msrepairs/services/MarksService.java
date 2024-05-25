@@ -13,10 +13,11 @@ public class MarksService {
     @Autowired
     MarksRepository marksRepository;
 
-    public List<MarkEntity> getMarks() { return (List<MarkEntity>) marksRepository.findAll(); }
+    public List<MarkEntity> getMarks() { return marksRepository.findAll(); }
 
     public MarkEntity saveMark(MarkEntity markEntity) { return marksRepository.save(markEntity); }
 
     public List<MarkEntity> saveMarks(List<MarkEntity> marksEntity) { return marksRepository.saveAll(marksEntity);  }
 
+    public String getMarkName(Long idMark) { return marksRepository.findById(idMark).get().getMarkName(); }
 }

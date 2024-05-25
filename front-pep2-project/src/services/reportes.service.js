@@ -1,7 +1,7 @@
 import httpClient from "../http-common";
 
-const getReport1 = () => {
-    return httpClient.get('/reportes/costos-vehiculos');
+const getVehicleCosts = () => {
+    return httpClient.get('/reports/costos-vehiculos');
 }
 
 const getReport2 = () => {
@@ -16,4 +16,4 @@ const getReport4 = () => {
     return httpClient.get('/reportes/reparaciones-resumen-marcas');
 }
 
-export default { getReport1, getReport2, getReport3, getReport4 };
+export default { getVehicleCosts, getReport2, getReport3, getReport4 };

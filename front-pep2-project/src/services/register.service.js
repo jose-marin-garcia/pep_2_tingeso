@@ -35,7 +35,7 @@ const retirarAuto = patent => {
 }
 
 const getBond = idMark => {
-    return httpClient.get(`/register/bonds/${idMark}`);
+    return httpClient.get(`/repairs/bonds/${idMark}`);
 }
 
 export default { getMarks, getRepairs, create, update, getBond, finalizarReparacion, getVehiclesNotFinished, getVehiclesNotRemoved, retirarAuto };

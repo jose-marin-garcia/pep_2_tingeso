@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Vehicle {
     private String patent;
-    private String mark;
+    private Long mark;
     private String model;
     private String type;
     private int year;

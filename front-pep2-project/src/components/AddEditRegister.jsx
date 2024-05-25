@@ -226,7 +226,7 @@ const AddEditRegister = () => {
                     >
                         <MenuItem value="Gasolina">Gasolina</MenuItem>
                         <MenuItem value="Diesel">Diesel</MenuItem>
-                        <MenuItem value="Hbrido">Híbrido</MenuItem>
+                        <MenuItem value="Híbrido">Híbrido</MenuItem>
                         <MenuItem value="Eléctrico">Eléctrico</MenuItem>
                     </Select>
                 </FormControl>

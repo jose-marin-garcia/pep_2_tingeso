@@ -7,8 +7,8 @@ import pep_2_tingeso.msrepairs.entities.BondEntity;
 import pep_2_tingeso.msrepairs.entities.HistoricEntity;
 import pep_2_tingeso.msrepairs.entities.MarkEntity;
 import pep_2_tingeso.msrepairs.model.Registry;
-import pep_2_tingeso.msrepairs.model.Vehicle;
 import pep_2_tingeso.msrepairs.services.BondsService;
+import pep_2_tingeso.msrepairs.services.HistoricsService;
 import pep_2_tingeso.msrepairs.services.MarksService;
 import pep_2_tingeso.msrepairs.services.RegisterService;
 
@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/repairs")
-@CrossOrigin("*")
+//@CrossOrigin("*")
 public class RepairsController {
 
     @Autowired
@@ -28,6 +28,9 @@ public class RepairsController {
     @Autowired
     RegisterService registerService;
 
+    @Autowired
+    HistoricsService historicService;
+
 /*    __  __          _
      |  \/  |__ _ _ _| |__ ___
      | |\/| / _` | '_| / /(_-<
@@ -37,6 +40,12 @@ public class RepairsController {
     public ResponseEntity<List<MarkEntity>> listTypeRepairs() {
         List<MarkEntity> marks = marksService.getMarks();
         return ResponseEntity.ok(marks);
+    }
+
+    @GetMapping("/{idMark}")
+    public ResponseEntity<String> getMark(@PathVariable Long idMark){
+        String mark = marksService.getMarkName(idMark);
+        return ResponseEntity.ok(mark);
     }
 
     @PostMapping("/mark/")
@@ -81,9 +90,20 @@ public class RepairsController {
     @PostMapping("/")
     public ResponseEntity<HistoricEntity> addRegister(@RequestBody Registry registo) {
         System.out.println(registo);
+        System.out.println(registo.getVehicle().getMark());
         HistoricEntity nuevoRegistro = registerService.saveRegistry(registo.getVehicle(), registo.getReparations(), registo.getIdBond());
         return ResponseEntity.ok(nuevoRegistro);
     }
 
+
+  /*_  _ _    _           _
+   | || (_)__| |_ ___ _ _(_)__
+   | __ | (_-<  _/ _ \ '_| / _|
+   |_||_|_/__/\__\___/_| |_\__|*/
+
+    @GetMapping("/historiales")
+    public ResponseEntity<List<HistoricEntity>> getHistorics() {
+        return ResponseEntity.ok(historicService.getHistorics());
+    }
 
 }

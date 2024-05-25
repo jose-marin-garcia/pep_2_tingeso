@@ -1,4 +1,4 @@
-package pep_2_tingeso.msrepairs.model;
+package pep_2_tingeso.msreports.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,17 +10,22 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class VehicleCostDetails {
-    private String patent; // Patente
-    private List<String> reparaciones;
+    private String patent;
+    private String mark;
+    private String model;
+    private String type;
+    private String typemotor;
+    private int year;
     private int sumaReparaciones;
     private int recargos;
     private int descuentos;
     private int iva;
     private int mount;
-    private String admissiondate; //ddmmyyyy
-    private String admissionhour; //hhmm
+    private String admissiondate;
+    private String admissionhour;
     private String enddate;
     private String endhour;
     private String clientdate;
     private String clienthour;
+    private List<String> reparaciones;
 }

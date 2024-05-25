@@ -6,4 +6,5 @@ import pep_2_tingeso.msvehicles.entities.VehicleEntity;
 
 @Repository
 public interface VehicleRepository extends JpaRepository<VehicleEntity, Long> {
+    VehicleEntity findByPatent(String patent);
 }

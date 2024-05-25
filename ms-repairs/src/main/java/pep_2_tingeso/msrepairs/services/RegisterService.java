@@ -6,10 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import pep_2_tingeso.msrepairs.entities.HistoricEntity;
 import pep_2_tingeso.msrepairs.entities.HistoryRepairsEntity;
-import pep_2_tingeso.msrepairs.model.Price;
-import pep_2_tingeso.msrepairs.model.Registry;
 import pep_2_tingeso.msrepairs.model.Vehicle;
-import pep_2_tingeso.msrepairs.model.VehicleBackend;
 import pep_2_tingeso.msrepairs.repositories.BondRepository;
 import pep_2_tingeso.msrepairs.repositories.HistoricRepository;
 import pep_2_tingeso.msrepairs.repositories.HistoryRepairsRepository;
@@ -71,11 +68,11 @@ public class RegisterService {
             historyRepairsRepository.save(new HistoryRepairsEntity(null, idHistorial, idReparacion));
         }
 
-        VehicleBackend vehicleBackend = new VehicleBackend(vehicle.getPatent(), markRepository.findByMarkName(vehicle.getMark()).getId(), vehicle.getModel(), vehicle.getType(), vehicle.getYear(), vehicle.getTypemotor(), vehicle.getNumberseats(), vehicle.getKilometers());
+        Vehicle vehicleBackend = new Vehicle(vehicle.getPatent(), vehicle.getMark(), vehicle.getModel(), vehicle.getType(), vehicle.getYear(), vehicle.getTypemotor(), vehicle.getNumberseats(), vehicle.getKilometers());
 
-        HttpEntity<VehicleBackend> request = new HttpEntity<>(vehicleBackend);
+        HttpEntity<Vehicle> request = new HttpEntity<>(vehicleBackend);
 
-        restTemplate.postForObject("http://ms-vehicles/vehicles/vehicle/", request, VehicleBackend.class);
+        restTemplate.postForObject("http://ms-vehicles/vehicles/vehicle/", request, Vehicle.class);
 
         return historial;
     }
@@ -113,7 +110,7 @@ public class RegisterService {
             case "Diesel":
                 descuento = calculateDiscountForDiesel(totalRepairs);
                 break;
-            case "Hibrido":
+            case "Híbrido":
                 descuento = calculateDiscountForHibrid(totalRepairs);
                 break;
             case "Electrico":

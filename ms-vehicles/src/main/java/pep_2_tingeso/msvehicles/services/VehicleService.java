@@ -14,4 +14,7 @@ public class VehicleService {
     public VehicleEntity saveVehicle(VehicleEntity vehicle) {
         return vehicleRepository.save(vehicle);
     }
+
+    public VehicleEntity getVehicle(String patent) { return vehicleRepository.findByPatent(patent);
+    }
 }

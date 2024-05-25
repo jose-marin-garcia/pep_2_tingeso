@@ -65,3 +65,15 @@ th, td {
 th {
   background-color: #f2f2f2;
 }
+
+tr.active {
+  background-color: #e8f0fe; /* Un color de fondo para resaltar la fila activa */
+}
+
+.details {
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+  display: block;
+  transition: all 0.3s ease-in-out;
+}

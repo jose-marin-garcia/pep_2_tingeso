@@ -7,7 +7,7 @@ import pep_2_tingeso.msvehicles.services.VehicleService;
 
 @RestController
 @RequestMapping("/vehicles")
-@CrossOrigin("*")
+//@CrossOrigin("*")
 public class VehiclesController {
 
     @Autowired
@@ -17,6 +17,12 @@ public class VehiclesController {
      \ \ / /__| |_ (_)__| |___
       \ V / -_) ' \| / _| / -_)
        \_/\___|_||_|_\__|_\___|*/
+
+    @GetMapping("/{patent}")
+    public VehicleEntity getVehicle(@PathVariable String patent) {
+        VehicleEntity vehicle = vehicleService.getVehicle(patent);
+        return vehicle;
+    }
 
     @PostMapping("/vehicle/")
     public VehicleEntity saveVehicle(@RequestBody VehicleEntity vehicle) {

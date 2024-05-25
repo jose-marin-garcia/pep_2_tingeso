@@ -5,7 +5,7 @@ import Navbar from "./components/Navbar";
 import AddEditRegister from './components/AddEditRegister';
 import FinalizarReparacion from './components/FinalizarReparación';
 import RetirarAuto from './components/RetirarAuto';
-import Reporte1 from './components/Reporte1';
+import Reporte1 from './components/ListadoHistoriales';
 import Reporte2 from './components/Reporte2';
 import Reporte3 from './components/Reporte3';
 import Reporte4 from './components/Reporte4';
