@@ -3,6 +3,7 @@ package pep_2_tingeso.msprices.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pep_2_tingeso.msprices.dto.PreciosDTO;
 import pep_2_tingeso.msprices.entities.PricesEntity;
 import pep_2_tingeso.msprices.entities.TypeRepairsEntity;
 import pep_2_tingeso.msprices.services.PricesService;
@@ -76,6 +77,12 @@ public class PricesController {
     public ResponseEntity<List<PricesEntity>> savePrices(@RequestBody List<PricesEntity> pricesEntity) {
         List<PricesEntity> pricesNew = pricesService.savePrices(pricesEntity);
         return ResponseEntity.ok(pricesNew);
+    }
+
+    @PostMapping("/reparacion-precios")
+    public ResponseEntity<PreciosDTO> saveTypeRepairAndPrices(@RequestBody PreciosDTO reparacionPrecios) {
+        PreciosDTO reparacionprecios = typeRepairsService.saveTypeRepairAndPrices(reparacionPrecios);
+        return ResponseEntity.ok(reparacionprecios);
     }
 
 }

@@ -59,6 +59,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		<finalName>tingeso2-gatewayserver</finalName>
 	</build>
 
 </project>

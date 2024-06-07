@@ -67,6 +67,14 @@ const AddEditRegister = () => {
                 .update(vehicle, repairs)
                 .then((response) => {
                     console.log("Registro ha sido actualizado.", response.data);
+                    setKilometers("");
+                    setNumberseats("");
+                    setYear("");
+                    setType("");
+                    setModel("");
+                    setMark("");
+                    setPatent("");
+                    setRepairs([]);
                     navigate("/registro");
                 })
                 .catch((error) => {
@@ -84,208 +92,240 @@ const AddEditRegister = () => {
                     const confirm = window.confirm(`Hay un bono disponible para este vehículo de ${bono.amount}. ¿Desea aplicarlo?`);
                     if (confirm) {
                         await registrarConBono(vehicle, repairs, bono.id);
+                        setKilometers("");
+                        setNumberseats("");
+                        setYear("");
+                        setType("");
+                        setModel("");
+                        setMark("");
+                        setPatent("");
+                        setRepairs([]);
+                        navigate("/registro");
                     } else {
                         await registrarConBono(vehicle, repairs, null);
+                        setKilometers("");
+                        setNumberseats("");
+                        setYear("");
+                        setType("");
+                        setModel("");
+                        setMark("");
+                        setPatent("");
+                        setRepairs([]);
+                        navigate("/registro");
                     }
                 } else {
                     console.log("No se encontró bono, procediendo sin aplicar bono.");
                     await registrarConBono(vehicle, repairs, null);
+                    setKilometers("");
+                    setNumberseats("");
+                    setYear("");
+                    setType("");
+                    setModel("");
+                    setMark("");
+                    setPatent("");
+                    setRepairs([]);
+                    navigate("/registro");
                 }
             } catch (error) {
                 console.error("Error al verificar bonos", error);
                 await registrarConBono(vehicle, repairs, null);
+                setKilometers("");
+                setNumberseats("");
+                setYear("");
+                setType("");
+                setModel("");
+                setMark("");
+                setPatent("");
+                setRepairs([]);
+                navigate("/registro");
             }
-            
+
         }
     };
 
-        const registrarConBono = async (vehicle, repairs, bono) => {
-            try {
-                const response = await registerService.create(vehicle, repairs, bono);
-                console.log("Se ha registrado correctamente.", response.data);
-                navigate("/registro");
-            } catch (error) {
-                console.log("Ha ocurrido un error al intentar crear nuevo registro.", error);
-            }
-        };
-
-        useEffect(() => {
-            if (id) {
-                setTitleRegisterForm("Editar Registro");
-                registerService
-                    .get(id)
-                    .then((register) => {
-                        setPatent(register.data.patent);
-                        setMarcaSeleccionada(register.data.mark);
-                        setModel(register.data.model);
-                        setType(register.data.type);
-                        setYear(register.data.year);
-                        setNumberseats(register.data.numberseats);
-                        setKilometers(register.data.kilometers);
-                        setRepairs(register.data.repairs);
-                    })
-                    .catch((error) => {
-                        console.log("Se ha producido un error.", error);
-                    });
-            } else {
-                setTitleRegisterForm("Nuevo Registro");
-            }
-
-            init();
-        }, []); // Ejecutar efecto solo una vez al montar el componente
-
-        return (
-            <Box
-                sx={{
-                    display: 'static',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    flexDirection: 'column',
-                    component: 'form',
-                }}
-            >
-                <h3> {titleRegisterForm} </h3>
-                <FormControl fullWidth>
-                    <TextField
-                        id="patent"
-                        label="Patente"
-                        value={patent}
-                        variant="standard"
-                        onChange={(e) => setPatent(e.target.value)}
-                        helperText="Ej. ABCD12"
-                    />
-                </FormControl>
-
-                <FormControl fullWidth>
-                    <InputLabel id="marca-label">Marca</InputLabel>
-                    <Select
-                        id="mark"
-                        value={mark}
-                        onChange={(e) => setMark(e.target.value)}
-                    >
-                        {Array.isArray(marcas) && marcas.map(marca => (
-                            <MenuItem key={marca.id} value={marca.id}>
-                                {marca.markName}
-                            </MenuItem>
-                        ))}
-                    </Select>
-                </FormControl>
-
-                <FormControl fullWidth>
-                    <TextField
-                        id="model"
-                        label="Modelo"
-                        value={model}
-                        variant="standard"
-                        onChange={(e) => setModel(e.target.value)}
-                    />
-                </FormControl>
-
-                <FormControl fullWidth variant="standard">
-                    <InputLabel id="type-label">Tipo de auto</InputLabel>
-                    <Select
-                        labelId="type-label"
-                        id="type"
-                        value={type}
-                        onChange={(e) => setType(e.target.value)}
-                        label="Tipo de auto"
-                    >
-                        <MenuItem value="Sedan">Sedan</MenuItem>
-                        <MenuItem value="Hatchback">Hatchback</MenuItem>
-                        <MenuItem value="SUV">SUV</MenuItem>
-                        <MenuItem value="Pickup">Pickup</MenuItem>
-                        <MenuItem value="Furgoneta">Furgoneta</MenuItem>
-                    </Select>
-                </FormControl>
-
-                <FormControl fullWidth>
-                    <DatePicker
-                        label="Año de fabricación"
-                        views={['year']}
-                        onChange={(newDate) => {
-                            const date = newDate instanceof Date ? newDate : new Date(newDate);
-                            if (!isNaN(date.getFullYear())) {
-                                const year = date.getFullYear();
-                                setYear(year);
-                                console.log("Año seleccionado:", year); // Esto te ayudará a verificar que el año se esté actualizando correctamente
-                            }
-                        }}
-                        style={{ marginBottom: '100px' }}
-                    />
-                </FormControl>
-
-
-                <FormControl fullWidth variant="standard">
-                    <InputLabel id="typemotor-label">Tipo de motor</InputLabel>
-                    <Select
-                        labelId="typemotor-label"
-                        id="typemotor"
-                        value={typemotor}
-                        onChange={(e) => setTypemotor(e.target.value)}
-                        label="Tipo de motor"
-                    >
-                        <MenuItem value="Gasolina">Gasolina</MenuItem>
-                        <MenuItem value="Diesel">Diesel</MenuItem>
-                        <MenuItem value="Híbrido">Híbrido</MenuItem>
-                        <MenuItem value="Eléctrico">Eléctrico</MenuItem>
-                    </Select>
-                </FormControl>
-
-                <FormControl fullWidth>
-                    <TextField
-                        id="numberseats"
-                        label="Número de asientos"
-                        value={numberseats}
-                        type="number"
-                        variant="standard"
-                        onChange={(e) => setNumberseats(e.target.value)}
-                    />
-                </FormControl>
-
-                <FormControl fullWidth>
-                    <TextField
-                        id="kilometers"
-                        label="Kilómetros"
-                        value={kilometers}
-                        type="number"
-                        variant="standard"
-                        onChange={(e) => setKilometers(e.target.value)}
-                    />
-                </FormControl>
-
-                <FormControl fullWidth>
-                    <Select
-                        labelId="demo-multiple-checkbox-label"
-                        id="demo-multiple-checkbox"
-                        multiple
-                        value={repairs}
-                        label="Reparaciones"
-                        onChange={(e) => setRepairs(e.target.value)}
-                        input={<OutlinedInput label="Tag" />}
-                    >
-                        {Array.isArray(reparaciones) && reparaciones.map(reparacion => (
-                            <MenuItem key={reparacion.id} value={reparacion.id}>
-                                {reparacion.repairName}
-                            </MenuItem>
-                        ))}
-                    </Select>
-                </FormControl>
-
-                <FormControl fullWidth>
-                    <br />
-                    <Button
-                        variant="contained"
-                        color="info"
-                        onClick={(e) => saveRegister(e)}
-                        style={{ marginLeft: "0.5rem" }}
-                        startIcon={<SaveIcon />}
-                    >
-                        Grabar
-                    </Button>
-                </FormControl>
-                <Link to="/registro">Back to List</Link>
-            </Box >
-        );
+    const registrarConBono = async (vehicle, repairs, bono) => {
+        try {
+            const response = await registerService.create(vehicle, repairs, bono);
+            console.log("Se ha registrado correctamente.", response.data);
+            navigate("/registro");
+        } catch (error) {
+            console.log("Ha ocurrido un error al intentar crear nuevo registro.", error);
+        }
     };
 
-    export default AddEditRegister;
+    useEffect(() => {
+        if (id) {
+            setTitleRegisterForm("Editar Registro");
+            registerService
+                .get(id)
+                .then((register) => {
+                    setPatent(register.data.patent);
+                    setMarcaSeleccionada(register.data.mark);
+                    setModel(register.data.model);
+                    setType(register.data.type);
+                    setYear(register.data.year);
+                    setNumberseats(register.data.numberseats);
+                    setKilometers(register.data.kilometers);
+                    setRepairs(register.data.repairs);
+                })
+                .catch((error) => {
+                    console.log("Se ha producido un error.", error);
+                });
+        } else {
+            setTitleRegisterForm("Nuevo Registro");
+        }
+
+        init();
+    }, []); // Ejecutar efecto solo una vez al montar el componente
+
+    return (
+        <Box className="form-box">
+            <h3 style={{ fontSize: '24px', marginTop: '0px', marginBottom: '0px' }}> {titleRegisterForm} </h3>
+            <FormControl fullWidth>
+                <TextField
+                    id="patent"
+                    label="Patente"
+                    value={patent}
+                    variant="standard"
+                    onChange={(e) => setPatent(e.target.value)}
+                    helperText="Ej. ABCD12"
+                />
+            </FormControl>
+
+            <FormControl fullWidth sx={{ mt: 0.7, mb: 0.7 }}>
+                <InputLabel id="marca-label">Marca</InputLabel>
+                <Select
+                    labelId="marca-label"
+                    id="mark"
+                    value={mark} // Asegúrate de que esto es un valor simple, no un arreglo
+                    onChange={(e) => setMark(e.target.value)}
+                    input={<OutlinedInput label="Marca" />}
+                >
+                    {Array.isArray(marcas) && marcas.map(marca => (
+                        <MenuItem key={marca.id} value={marca.id}>
+                            {marca.markName}
+                        </MenuItem>
+                    ))}
+                </Select>
+            </FormControl>
+
+
+            <FormControl fullWidth sx={{ mt: 0.7, mb: 0.7 }}>
+                <TextField
+                    id="model"
+                    label="Modelo"
+                    value={model}
+                    variant="standard"
+                    onChange={(e) => setModel(e.target.value)}
+                />
+            </FormControl>
+
+            <FormControl fullWidth variant="standard" sx={{ mt: 0.7, mb: 0.7 }}>
+                <InputLabel id="type-label">Tipo de auto</InputLabel>
+                <Select
+                    labelId="type-label"
+                    id="type"
+                    value={type}
+                    onChange={(e) => setType(e.target.value)}
+                    label="Tipo de auto"
+                >
+                    <MenuItem value="Sedan">Sedan</MenuItem>
+                    <MenuItem value="Hatchback">Hatchback</MenuItem>
+                    <MenuItem value="SUV">SUV</MenuItem>
+                    <MenuItem value="Pickup">Pickup</MenuItem>
+                    <MenuItem value="Furgoneta">Furgoneta</MenuItem>
+                </Select>
+            </FormControl>
+
+            <FormControl fullWidth sx={{ mt: 0.7, mb: 0.7 }}>
+                <DatePicker
+                    label="Año de fabricación"
+                    views={['year']}
+                    onChange={(newDate) => {
+                        const date = newDate instanceof Date ? newDate : new Date(newDate);
+                        if (!isNaN(date.getFullYear())) {
+                            const year = date.getFullYear();
+                            setYear(year);
+                            console.log("Año seleccionado:", year); // Esto te ayudará a verificar que el año se esté actualizando correctamente
+                        }
+                    }}
+                    style={{ marginBottom: '100px' }}
+                />
+            </FormControl>
+
+
+            <FormControl fullWidth variant="standard" sx={{ mt: 0.7, mb: 0.7 }}>
+                <InputLabel id="typemotor-label">Tipo de motor</InputLabel>
+                <Select
+                    labelId="typemotor-label"
+                    id="typemotor"
+                    value={typemotor}
+                    onChange={(e) => setTypemotor(e.target.value)}
+                    label="Tipo de motor"
+                >
+                    <MenuItem value="Gasolina">Gasolina</MenuItem>
+                    <MenuItem value="Diesel">Diesel</MenuItem>
+                    <MenuItem value="Híbrido">Híbrido</MenuItem>
+                    <MenuItem value="Eléctrico">Eléctrico</MenuItem>
+                </Select>
+            </FormControl>
+
+            <FormControl fullWidth sx={{ mt: 0.7, mb: 0.7 }}>
+                <TextField
+                    id="numberseats"
+                    label="Número de asientos"
+                    value={numberseats}
+                    type="number"
+                    variant="standard"
+                    onChange={(e) => setNumberseats(e.target.value)}
+                />
+            </FormControl>
+
+            <FormControl fullWidth sx={{ mt: 0.7, mb: 0.7 }}>
+                <TextField
+                    id="kilometers"
+                    label="Kilómetros"
+                    value={kilometers}
+                    type="number"
+                    variant="standard"
+                    onChange={(e) => setKilometers(e.target.value)}
+                />
+            </FormControl>
+
+            <FormControl fullWidth>
+                <InputLabel id="repairs-label">Reparaciones</InputLabel>
+                <Select
+                    labelId="repairs-label"
+                    id="demo-multiple-checkbox"
+                    multiple
+                    value={repairs}
+                    onChange={(e) => setRepairs(e.target.value)}
+                    input={<OutlinedInput label="Reparaciones" />}  // Aquí se asegura que el label del OutlinedInput coincida
+                >
+                    {Array.isArray(reparaciones) && reparaciones.map(reparacion => (
+                        <MenuItem key={reparacion.id} value={reparacion.id}>
+                            {reparacion.repairName}
+                        </MenuItem>
+                    ))}
+                </Select>
+            </FormControl>
+
+
+            <FormControl fullWidth>
+                <br />
+                <Button
+                    variant="contained"
+                    color="info"
+                    onClick={(e) => saveRegister(e)}
+                    style={{ marginLeft: "0.5rem" }}
+                    startIcon={<SaveIcon />}
+                >
+                    Grabar
+                </Button>
+            </FormControl>
+            <Link to="/registro">Back to List</Link>
+        </Box >
+    );
+};
+
+export default AddEditRegister;

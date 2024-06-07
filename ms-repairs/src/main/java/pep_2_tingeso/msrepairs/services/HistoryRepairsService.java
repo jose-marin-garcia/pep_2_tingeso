@@ -22,8 +22,16 @@ public class HistoryRepairsService {
         List<String> nombreReparaciones = new ArrayList<>();
         List<HistoryRepairsEntity> reparaciones = historyRepairsRepository.findByIdHistorial(idHistoric);
         for (HistoryRepairsEntity reparacion : reparaciones) {
-            nombreReparaciones.add(restTemplate.getForObject("http://ms-prices:8080/prices/"+reparacion.getIdReparacion(), String.class));
+            nombreReparaciones.add(restTemplate.getForObject("http://ms-prices/prices/"+reparacion.getIdReparacion(), String.class));
         }
         return nombreReparaciones;
+    }
+
+    public List<HistoryRepairsEntity> getHistorRepairByIdHistoric(Long idRepair) {
+        return historyRepairsRepository.findByIdHistorial(idRepair);
+    }
+
+    public List<HistoryRepairsEntity> getHistoryRepairByIdReparacion(Long idReparacion) {
+        return historyRepairsRepository.findByIdReparacion(idReparacion);
     }
 }

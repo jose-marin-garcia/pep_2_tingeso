@@ -61,33 +61,43 @@ export default function Sidemenu({ open, toggleDrawer }) {
 
         <Divider />
 
-        <ListItemButton onClick={() => navigate("/reporte1")}>
+        <ListItemButton onClick={() => navigate("/nueva-marca")}>
           <ListItemIcon>
             <MoreTimeIcon />
+          </ListItemIcon>
+          <ListItemText primary="Agregar Nueva Marca" />
+        </ListItemButton>
+
+        <ListItemButton onClick={() => navigate("/nueva-reparacion")}>
+          <ListItemIcon>
+            <MoreTimeIcon />
+          </ListItemIcon>
+          <ListItemText primary="Agregar Nueva Reparación" />
+        </ListItemButton>
+
+        <Divider />
+
+        <ListItemButton onClick={() => navigate("/listado")}>
+          <ListItemIcon>
+            <MoreTimeIcon />
+          </ListItemIcon>
+          <ListItemText primary="Listado Historiales" />
+        </ListItemButton>
+
+        <ListItemButton onClick={() => navigate("/reporte1")}>
+          <ListItemIcon>
+            <PaidIcon />
           </ListItemIcon>
           <ListItemText primary="Reporte 1" />
         </ListItemButton>
 
         <ListItemButton onClick={() => navigate("/reporte2")}>
           <ListItemIcon>
-            <PaidIcon />
+            <CalculateIcon />
           </ListItemIcon>
           <ListItemText primary="Reporte 2" />
         </ListItemButton>
-
-        <ListItemButton onClick={() => navigate("/reporte3")}>
-          <ListItemIcon>
-            <CalculateIcon />
-          </ListItemIcon>
-          <ListItemText primary="Reporte 3" />
-        </ListItemButton>
-
-        <ListItemButton onClick={() => navigate("/reporte4")}>
-          <ListItemIcon>
-            <AnalyticsIcon />
-          </ListItemIcon>
-          <ListItemText primary="Reporte 4" />
-        </ListItemButton>
+        
       </List>
     </Box>
   );

@@ -17,4 +17,9 @@ public class HistoricsService {
         return historicRepository.findAll();
     }
 
+    public List<HistoricEntity> getHistoricsByMonthAndYear(String mes, String anio) {
+        List<HistoricEntity> historics = historicRepository.findByMonthAndYear(mes, anio);
+        System.out.println(historics);
+        return historics;
+    }
 }

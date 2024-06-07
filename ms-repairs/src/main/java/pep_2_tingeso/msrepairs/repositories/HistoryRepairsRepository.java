@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface HistoryRepairsRepository extends JpaRepository<HistoryRepairsEntity, Long> {
     List<HistoryRepairsEntity> findByIdHistorial(Long idHistoric);
+
+    List<HistoryRepairsEntity> findByIdReparacion(Long idReparacion);
 }

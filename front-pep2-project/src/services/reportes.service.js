@@ -4,16 +4,12 @@ const getVehicleCosts = () => {
     return httpClient.get('/reports/costos-vehiculos');
 }
 
-const getReport2 = () => {
-    return httpClient.get('/reportes/reparaciones-resumen-tipo');
+const getReport1 = (mes, anio) => {
+    return httpClient.get(`/reports/report1?mes=${mes}&anio=${anio}`);
 }
 
-const getReport3 = () => {
-    return httpClient.get('/reportes/tiempo-promedio-reparaciones-marcas');
+const getReport2 = (mes,anio) => {
+    return httpClient.get(`/reports/report2?mes=${mes}&anio=${anio}`);
 }
 
-const getReport4 = () => {
-    return httpClient.get('/reportes/reparaciones-resumen-marcas');
-}
-
-export default { getVehicleCosts, getReport2, getReport3, getReport4 };
+export default { getVehicleCosts, getReport1, getReport2 };

@@ -15,7 +15,7 @@ public class MarksService {
 
     public List<MarkEntity> getMarks() { return marksRepository.findAll(); }
 
-    public MarkEntity saveMark(MarkEntity markEntity) { return marksRepository.save(markEntity); }
+    public MarkEntity saveMark(String markEntity) { return marksRepository.save(new MarkEntity(null, markEntity)); }
 
     public List<MarkEntity> saveMarks(List<MarkEntity> marksEntity) { return marksRepository.saveAll(marksEntity);  }
 

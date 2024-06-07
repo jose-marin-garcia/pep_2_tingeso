@@ -3,10 +3,13 @@ package pep_2_tingeso.msrepairs.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pep_2_tingeso.msrepairs.dto.VehicleDto;
 import pep_2_tingeso.msrepairs.entities.BondEntity;
 import pep_2_tingeso.msrepairs.entities.HistoricEntity;
+import pep_2_tingeso.msrepairs.entities.HistoryRepairsEntity;
 import pep_2_tingeso.msrepairs.entities.MarkEntity;
 import pep_2_tingeso.msrepairs.model.Registry;
+import pep_2_tingeso.msrepairs.model.Vehicle;
 import pep_2_tingeso.msrepairs.services.*;
 
 import java.util.List;
@@ -29,7 +32,10 @@ public class RepairsController {
     HistoricsService historicService;
 
     @Autowired
-    HistoryRepairsService typeRepairsService;
+    HistoryRepairsService historyRepairService;
+
+    @Autowired
+    VehiclesService vehicleService;
 
 /*    __  __          _
      |  \/  |__ _ _ _| |__ ___
@@ -48,8 +54,8 @@ public class RepairsController {
         return ResponseEntity.ok(mark);
     }
 
-    @PostMapping("/mark/")
-    public ResponseEntity<MarkEntity> saveMark(@RequestBody MarkEntity mark) {
+    @PostMapping("/mark/{mark}")
+    public ResponseEntity<MarkEntity> saveMark(@PathVariable String mark) {
         MarkEntity markNew = marksService.saveMark(mark);
         return ResponseEntity.ok(markNew);
     }
@@ -106,6 +112,11 @@ public class RepairsController {
         return ResponseEntity.ok(historicService.getHistorics());
     }
 
+    @GetMapping("/historiales/{mes}/{anio}")
+    public ResponseEntity<List<HistoricEntity>> getHistoricsByMonthAndYear(@PathVariable String mes, @PathVariable String anio) {
+        return ResponseEntity.ok(historicService.getHistoricsByMonthAndYear(mes, anio));
+    }
+
 /*    _____               ___                _
      |_   _|  _ _ __  ___| _ \___ _ __  __ _(_)_ _ ___
        | || || | '_ \/ -_)   / -_) '_ \/ _` | | '_(_-<
@@ -114,9 +125,55 @@ public class RepairsController {
 
     @GetMapping("/typerepair/{idHistoric}")
     public ResponseEntity<List<String>> getRepairsOfHistoric(@PathVariable Long idHistoric){
-        List<String> historic = typeRepairsService.getRepairsOfHistoric(idHistoric);
+        List<String> historic = historyRepairService.getRepairsOfHistoric(idHistoric);
         return ResponseEntity.ok(historic);
     }
 
+/*
+ *     __   __   _    _    _
+ *     \ \ / /__| |_ (_)__| |___
+ *      \ V / -_) ' \| / _| / -_)
+ *       \_/\___|_||_|_\__|_\___|
+ *
+ */
+
+    @GetMapping("/vehicles-not-finished/")
+    public ResponseEntity<List<VehicleDto>> getVehiclesNotFinished(){
+        return ResponseEntity.ok(vehicleService.getVehiclesNotFinished());
+    }
+
+    @PutMapping("/finish/{patent}")
+    public ResponseEntity<Vehicle> finishVehicle(@PathVariable String patent){
+        return ResponseEntity.ok(vehicleService.finishVehicle(patent));
+    }
+
+    @GetMapping("/vehicles-not-removed/")
+    public ResponseEntity<List<VehicleDto>> getVehiclesNotRemoved(){
+        return ResponseEntity.ok(vehicleService.getVehiclesNotRemoved());
+    }
+
+    @PutMapping("/remove/{patent}")
+    public ResponseEntity<Vehicle> removeVehicle(@PathVariable String patent){
+        return ResponseEntity.ok(vehicleService.removeVehicle(patent));
+    }
+
+
+/*
+ *      _  _ _    _                ___                _
+ *     | || (_)__| |_ ___ _ _ _  _| _ \___ _ __  __ _(_)_ _
+ *     | __ | (_-<  _/ _ \ '_| || |   / -_) '_ \/ _` | | '_|
+ *     |_||_|_/__/\__\___/_|  \_, |_|_\___| .__/\__,_|_|_|
+ *                            |__/        |_|
+ */
+
+    @GetMapping("/historyrepairbyidhistoric/{idHistoric}")
+    public ResponseEntity<List<HistoryRepairsEntity>> getHistoricByRepair(@PathVariable Long idHistoric){
+        return ResponseEntity.ok(historyRepairService.getHistorRepairByIdHistoric(idHistoric));
+    }
+
+    @GetMapping("/historyrepairbyidreparacion/{idReparacion}")
+    public ResponseEntity<List<HistoryRepairsEntity>> getHistoryRepairByIdReparacion(@PathVariable Long idReparacion){
+        return ResponseEntity.ok(historyRepairService.getHistoryRepairByIdReparacion(idReparacion));
+    }
 
 }

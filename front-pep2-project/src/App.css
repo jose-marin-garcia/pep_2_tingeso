@@ -25,6 +25,9 @@
 
 .content {
   padding-top: 64px; /* Ajusta el padding-top para dejar espacio para el Navbar */
+  position: relative;
+  z-index: 1; /* Asegura que el contenido esté por encima de la imagen de fondo */
+  padding: 20px;
 }
 
 .home-container {
@@ -45,11 +48,6 @@
   opacity: 0.5;
 }
 
-.content {
-  position: relative;
-  z-index: 1; /* Asegura que el contenido esté por encima de la imagen de fondo */
-  padding: 20px;
-}
 
 .container {
   display: flex;
@@ -64,7 +62,7 @@ table {
 
 th, td {
   border: 1px solid #dddddd;
-  text-align: left;
+  text-align: center;
   padding: 8px;
 }
 
@@ -87,7 +85,7 @@ th {
 }
 
 .button-detail {
-  background-color: rgb(94, 155, 224);
+  background-color: rgb(25,118,210);
   color: white;
   padding: 10px 10px;
   border: none;
@@ -102,4 +100,25 @@ th {
 
 .button-detail.selected {
   background-color: rgb(0, 0, 255);  /* Color cuando está seleccionado*/
+}
+
+.form-container {
+  max-width: 400px; /* Ajusta el ancho máximo del formulario */
+  margin: 20px auto; /* Centra el formulario horizontalmente y agrega margen vertical */
+  padding: 10px; /* Añade un poco de relleno alrededor del formulario */
+}
+
+.form-box {
+  display: flex; /* Modificado de 'static' a 'flex' para que justifyContent y alignItems tengan efecto */
+  justify-content: center;
+  flex-direction: column;
+  padding: 3rem; /* '3' de Material UI es aproximadamente 3*8px = 24px, convertido a rem si tu base es 16px */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #ffffff; /* Asegúrate de que 'background.paper' en tu tema sea '#ffffff' */
+  width: 100%;
+  max-width: 500px;
+  margin: auto;
+  margin-top: 16px; /* '2' en Material UI generalmente se traduce a 16px */
 }

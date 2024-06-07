@@ -33,12 +33,12 @@ const VehicleCosts = () => {
                 <th>Modelo</th>
                 <th>Tipo Vehículo</th>
                 <th>Tipo Motor</th>
-                <th>Año Fabricación</th>
+                <th>Año Fca.</th>
                 <th>Fecha Ingreso Taller</th>
                 <th>Hora Ingreso taller</th>
                 <th>Monto Total Reparaciones</th>
                 <th>Recargos</th>
-                <th>Descuentos</th>
+                <th>Desct.º</th>
                 <th>IVA</th>
                 <th>Costo Total</th>
                 <th>Fecha Salida Taller</th>

@@ -1,5 +1,13 @@
 import httpClient from "../http-common";
 
+const saveMark = (mark) => {
+    return httpClient.post(`/repairs/mark/${mark}`);
+}
+
+const savePrices = (formValues) => {
+    return httpClient.post('/prices/reparacion-precios', formValues);
+}
+
 const getMarks = () => {
     return httpClient.get('/repairs/');
 }
@@ -19,23 +27,23 @@ const update = (vehicle, reparations, idBond) => {
 }
 
 const getVehiclesNotFinished = () => {
-    return httpClient.get('/register/vehicles-not-finished/');
+    return httpClient.get('/repairs/vehicles-not-finished/');
 }
 
 const finalizarReparacion = patent => {
-    return httpClient.put(`/register/finish/${patent}`);
+    return httpClient.put(`/repairs/finish/${patent}`);
 }
 
 const getVehiclesNotRemoved = () => {
-    return httpClient.get('/register/vehicles-not-removed/');
+    return httpClient.get('/repairs/vehicles-not-removed/');
 }
 
 const retirarAuto = patent => {
-    return httpClient.put(`/register/remove/${patent}`);
+    return httpClient.put(`/repairs/remove/${patent}`);
 }
 
 const getBond = idMark => {
     return httpClient.get(`/repairs/bonds/${idMark}`);
 }
 
-export default { getMarks, getRepairs, create, update, getBond, finalizarReparacion, getVehiclesNotFinished, getVehiclesNotRemoved, retirarAuto };
+export default { saveMark, savePrices, getMarks, getRepairs, create, update, getBond, finalizarReparacion, getVehiclesNotFinished, getVehiclesNotRemoved, retirarAuto };
