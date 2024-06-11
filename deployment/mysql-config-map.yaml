@@ -7,13 +7,13 @@ metadata:
 data:
   DB_HOST_PRICES: prices-db-service
   DB_PORT_PRICES: "3306"
-  DB_DBNAME_PRICES: prices_db
+  DB_DBNAME_PRICES: prices-db
   DB_HOST_REPAIRS: repairs-db-service
   DB_PORT_REPAIRS: "3306"
-  DB_DBNAME_REPAIRS: repairs_db
+  DB_DBNAME_REPAIRS: repairs-db
   DB_HOST_VEHICLES: vehicles-db-service
   DB_PORT_VEHICLES: "3306"
-  DB_DBNAME_VEHICLES: vehicles_db
+  DB_DBNAME_VEHICLES: vehicles-db
   DB_HOST_REPORTS: reports-db-service
   DB_PORT_REPORTS: "3306"
-  DB_DBNAME_REPORTS: reports_db
+  DB_DBNAME_REPORTS: reports-db
