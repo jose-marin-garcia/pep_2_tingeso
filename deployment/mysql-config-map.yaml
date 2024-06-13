@@ -17,5 +17,3 @@ data:
   DB_HOST_REPORTS: reports-db-service
   DB_PORT_REPORTS: "3306"
   DB_DBNAME_REPORTS: reports-db
-
-  aa
