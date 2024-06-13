@@ -1,2 +1,3 @@
+# Ignorar archivos de configuración específicos
 mysql-config-map.yaml
 mysql-secrets.yaml
