@@ -16,22 +16,21 @@ spec:
     spec:
       containers:
         - name: frontend-container
-          image: josemaring/frontend-pep2
+          image: josemaring/front-pep2-project:latest
           ports:
-            - containerPort: 3000
-
+            - containerPort: 80
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: frontend-service
   labels:
-    app: frontend
+    app: frontend-service
 spec:
   selector:
     app: frontend-deployment
   ports:
     - protocol: TCP
-      port: 3000
-      targetPort: 3000
+      port: 80
+      targetPort: 80
   type: LoadBalancer
