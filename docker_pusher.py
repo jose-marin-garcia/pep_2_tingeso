@@ -21,7 +21,7 @@ def main():
     ruta_raiz = os.getcwd()
     # Nombre de las carpetas de los microservicios
     microservicios = ["config-server", "eureka-server", "gateway-server", "ms-prices",
-                      "ms-vehicles", "ms-repairs", "ms-reports"]
+                      "ms-vehicles", "ms-repairs", "ms-reports", "front-pep2-project"]
 
     # Ejecutar comandos en cada microservicio
     for microservicio in microservicios:

@@ -1,7 +1,7 @@
 import httpClient from "../http-common";
 
 const getVehicleCosts = () => {
-    return httpClient.get('/reports/costos-vehiculos');
+    return httpClient.get('/repairs/costos-vehiculos');
 }
 
 const getReport1 = (mes, anio) => {

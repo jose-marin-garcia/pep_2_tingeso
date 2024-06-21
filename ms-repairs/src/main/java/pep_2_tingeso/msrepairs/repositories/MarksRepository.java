@@ -7,6 +7,5 @@ import pep_2_tingeso.msrepairs.entities.MarkEntity;
 @Repository
 public interface MarksRepository extends JpaRepository<MarkEntity, Long> {
 
-    //MarkEntity findById(Long idMark);
 
 }

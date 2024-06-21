@@ -3,6 +3,7 @@ package pep_2_tingeso.msrepairs.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pep_2_tingeso.msrepairs.dto.VehicleCostDetails;
 import pep_2_tingeso.msrepairs.dto.VehicleDto;
 import pep_2_tingeso.msrepairs.entities.BondEntity;
 import pep_2_tingeso.msrepairs.entities.HistoricEntity;
@@ -176,4 +177,8 @@ public class RepairsController {
         return ResponseEntity.ok(historyRepairService.getHistoryRepairByIdReparacion(idReparacion));
     }
 
+    @GetMapping("/costos-vehiculos")
+    public ResponseEntity<List<VehicleCostDetails>> getCostosVehiculos() {
+        return ResponseEntity.ok(historyRepairService.getCostosVehiculos());
+    }
 }
